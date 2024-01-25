@@ -1,6 +1,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const MongoClient = require('mongodb').MongoClient;
+const dotenv = require('dotenv'); 
+dotenv.config(); 
 const app = express();
 
 app.set('view engine', 'ejs');
@@ -8,7 +10,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(express.static('public'));
 
-const uri = "mongodb+srv://l7476767:YYBFsG2THKVFpRzc@cluster0.ehrrzpd.mongodb.net/";
+const uri = process.env.DB_URI; 
 
 MongoClient.connect(uri, { useUnifiedTopology: true })
   .then(client => {
